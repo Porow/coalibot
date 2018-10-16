@@ -10,8 +10,8 @@ import (
 	"github.com/nlopes/slack"
 )
 
-func Kaamelott(option string, event *Struct.Message) bool {
-	bytes, err := ioutil.ReadFile("Citation/kaamelott.txt")
+func Mhenni(option string, event *Struct.Message) bool {
+	bytes, err := ioutil.ReadFile("Citation/mhenni.txt")
 
 	if err != nil {
 		fmt.Println(err)
@@ -19,7 +19,7 @@ func Kaamelott(option string, event *Struct.Message) bool {
 	}
 	splited := strings.Split(string(bytes), "\n")
 	citation := splited[rand.Int()%len(splited)]
-	params := slack.PostMessageParameters{UnfurlMedia: true, UnfurlLinks: true, Markdown: true, IconURL: "https://img15.hostingpics.net/pics/4833663350.jpg", Username: "Perceval"}
+	params := slack.PostMessageParameters{UnfurlMedia: true, UnfurlLinks: true, Markdown: true, IconURL: "https://risibank.fr/cache/stickers/d656/65606-full.png", Username: "Mohammed Henni"}
 	event.API.PostMessage(event.Channel, "> "+citation, params)
 	return true
 }

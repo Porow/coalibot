@@ -2,7 +2,6 @@ package FortyTwo
 
 import (
 	"encoding/json"
-	"fmt"
 	"sort"
 	"strconv"
 	"strings"
@@ -21,7 +20,7 @@ func Event(option string, event *Struct.Message) bool {
 		endAt = rangeBegin.AddDate(0, 0, 1).Format("2006-01-02")
 		beginAt = rangeBegin.Format("2006-01-02")
 	} else if len(strings.Split(option, " ")) == 1 {
-		rangeBegin, _ := time.Parse("2006-01-02", strings.Split(option, " ")[0])
+		rangeBegin, _ := time.Parse("02/01/2006", strings.Split(option, " ")[0])
 		endAt = rangeBegin.AddDate(0, 0, 1).Format("2006-01-02")
 		beginAt = rangeBegin.Format("2006-01-02")
 	} else {
@@ -33,8 +32,11 @@ func Event(option string, event *Struct.Message) bool {
 	if err != nil {
 		return false
 	}
-	fmt.Println(data)
 	sort.Slice(data, func(i, j int) bool { return data[i].BeginAt.Before(*data[j].BeginAt) })
+	if len(data) == 0 {
+		event.API.PostMessage(event.Channel, "Pas d'event ce jour!", Struct.SlackParams)
+		return true
+	}
 	for i := 0; i < len(data); i++ {
 		var desc = data[i].Description
 		if len(data[i].Description) > 150 {

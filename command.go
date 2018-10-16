@@ -7,11 +7,13 @@ import (
 	"os"
 	"strings"
 
+	"github.com/genesixx/coalibot/Bars"
 	"github.com/genesixx/coalibot/Citation"
 	"github.com/genesixx/coalibot/Database"
 	"github.com/genesixx/coalibot/FortyTwo"
 	"github.com/genesixx/coalibot/Miscs"
 	"github.com/genesixx/coalibot/Struct"
+	"github.com/genesixx/coalibot/Users"
 	"github.com/genesixx/coalibot/Utils"
 )
 
@@ -31,11 +33,18 @@ var commands = map[string]func(string, *Struct.Message) bool{
 	"where":        FortyTwo.Where,
 	"oss":          Citation.Oss,
 	"kaamelott":    Citation.Kaamelott,
+	"mhenni":       Citation.Mhenni,
 	"help":         Miscs.Help,
 	"music":        Miscs.Music,
 	"addmusic":     Miscs.AddMusic,
 	"dtc":          Miscs.Dtc,
 	"event":        FortyTwo.Event,
+	"roulettetop":  Miscs.RouletteTop,
+	"anroche":      Users.Anroche,
+	"spritz":       Bars.Spritz,
+	"cdt":          Bars.Cdt,
+	"gfaim":        Miscs.Gfaim,
+	"apero":        Miscs.Apero,
 }
 
 func handleCommand(event *Struct.Message) {
